@@ -1,0 +1,11 @@
+#choose
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-right: 230px;
+}
+#rezultat
+{
+    text-align: start;
+}

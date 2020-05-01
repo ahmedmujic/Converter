@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design for Bootstrap</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="styless.css">
+</head>
+<body>
+    Dužina
+    B. Masa
+    C. Volumen
+    D.Površina
+    E. Brzina
+    F. Pritisak
+  <header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark blue scrolling-navbar ">
+      <strong class="navbar-brand ml-5">Konverter jedinica</strong>
+      <div class="navbar-collapse" >
+        <ul class="navbar-nav  " id="choose">
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="convertMass(masa,masa)">Masa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="convertMass(volumen, volumen)" >Volumen</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="convertMass(povrsina, povrsina)">Površina</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="convertMass(brzina, brzina)">Brzina</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="convertMass(pritisak, pritisak)">Pritisak</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  
+  </header>
+ <!-- Default form contact -->
+<form class="text-center border border-light p-5 mt-3" id="forma">
+
+    <p class="h4 mb-4">Brz i jednostavan konverter jedinica</p>
+
+    <!-- Name -->
+    <input type="number" id="unos" class="form-control mb-4" placeholder="Vrijednost" required>
+
+
+    <!-- Subject -->
+    <!-- <label>Odaberite jedinicu iz koje pretvarate</label>
+    <select class="browser-default custom-select mb-4" id="base1">
+        
+    </select> -->
+     <!-- Subject -->
+     
+
+   
+
+    <!-- Send button -->
+    <button class="btn btn-info btn-block" onclick="pretvori(unos.value, base1.value, base2.value)" id="dugme">IZRAČUNAJ</button>
+
+</form>
+<!-- Default form contact -->
+ 
+
+</body>
+<script>
+    var b=0;
+    var vrijednosti1 = ["masa", "volumen", "povrsina", "brzina", "pritisak"]
+    var vrijednost;
+    var masa=["mg", "cg", "dg", "g", "dkg","hg", "kg"];
+    var volumen=["mm³","cm³", "dm³", "m³","km³"];
+    var povrsina=["mm²","cm²", "dm²", "m²", "ha","km²"];
+    var brzina=["m/s", "m/h", "km/s", "km/h"];
+    var pritisak=["paskal", "kilopaskal", "milibar", "bar"];
+    function convertMass(broj, valuta)
+    {
+        if (b>0)
+        {
+            var element = document.getElementById('base1');
+            element.parentNode.removeChild(element);
+
+            var element12 = document.getElementById('opis');
+            element12.parentNode.removeChild(element12);
+
+            var element2 = document.getElementById('base2');
+            element2.parentNode.removeChild(element2);
+
+            var element22 = document.getElementById('opis2');
+            element22.parentNode.removeChild(element22);
+
+            var element3 = document.getElementById('rezultat');
+            element3.parentNode.removeChild(element3);
+
+            var element31 = document.getElementById('opis3');
+            element31.parentNode.removeChild(element31);
+        }
+        vrijednost=valuta;
+        var node1= document.createElement("select");
+        node1.setAttribute("id","base1");
+        node1.setAttribute("class","browser-default custom-select mb-4");
+        document.getElementById("forma").insertBefore(node1,document.getElementById("dugme"));
+        var lbl = document.createElement("label");
+        lbl.setAttribute("id","opis");
+        var text_node1 = document.createTextNode("Odaberite jedinicu iz koje pretvarate");
+        lbl.appendChild(text_node1);
+        document.getElementById("forma").insertBefore(lbl,document.getElementById("base1"));
+        for(var i=0;i<broj.length;i++)
+        {
+            var node2 = document.createElement("option");
+            var text_node = document.createTextNode(broj[i]);
+            node2.appendChild(text_node);
+            document.getElementById("base1").appendChild(node2);
+        }
+        var node2= document.createElement("select");
+        node2.setAttribute("id","base2");
+        node2.setAttribute("class","browser-default custom-select mb-4");
+      
+        document.getElementById("forma").insertBefore(node2,document.getElementById("dugme"));
+        var lbl2 = document.createElement("label");
+        lbl2.setAttribute("id","opis2");
+        var text_node2 = document.createTextNode("Odaberite jedinicu u koju pretvarate");
+        lbl2.appendChild(text_node2);
+        document.getElementById("forma").insertBefore(lbl2 ,document.getElementById("base2"));
+        for(var i=0;i<broj.length;i++)
+        {
+            var node2 = document.createElement("option");
+            var text_node = document.createTextNode(broj[i]);
+            node2.appendChild(text_node);
+            document.getElementById("base2").appendChild(node2);
+        }
+        var result = document.createElement("output");
+        result.setAttribute("class","form-control mb-4 ");
+        result.setAttribute("id","rezultat");
+        var lbl3 = document.createElement("label");
+        lbl3.setAttribute("id","opis3");
+        var text_node3 = document.createTextNode("Rezultat");
+        lbl3.appendChild(text_node3);
+        document.getElementById("forma").insertBefore(result ,document.getElementById("dugme"));
+        document.getElementById("forma").insertBefore(lbl3 ,document.getElementById("rezultat"));
+         b++;
+        
+    }
+    function pretvori(num_value, b1_value, b2_value)
+    {
+        // for(val in vrijednosti1)
+        // {
+        //     console.log(val.value);
+        // }
+
+          var tez_faktor;
+        if(vrijednost==masa) tez_faktor=1;
+        if(vrijednost==povrsina) tez_faktor=2;
+        if(vrijednost==volumen) tez_faktor=3;
+        if(vrijednost==brzina) convertSpeed();
+        var rezultat;
+        var br_m=0,br_v=0;
+      for(var i=0;i<vrijednost.length;i++)
+      {
+        if(vrijednost[i]==b1_value) br_m=i;
+        else if(vrijednost[i]==b2_value) br_v=i;
+      }
+      if(br_m == 0 && br_v==0) rezultat=num_value;
+      else if(br_m<br_v) rezultat= (num_value/Math.pow(Math.pow(10, tez_faktor),br_v-br_m));
+      else rezultat= (num_value*Math.pow(Math.pow(10, tez_faktor),br_m-br_v));
+      console.log(rezultat);
+      document.getElementById("rezultat").textContent=rezultat;
+    }
+    function convertSpeed()
+    {
+
+    }
+    
+</script>
+ <!-- jQuery -->
+ <script type="text/javascript" src="js/jquery.min.js"></script>
+ <!-- Bootstrap tooltips -->
+ <script type="text/javascript" src="js/popper.min.js"></script>
+ <!-- Bootstrap core JavaScript -->
+ <script type="text/javascript" src="js/bootstrap.min.js"></script>
+ <!-- MDB core JavaScript -->
+ <script type="text/javascript" src="js/mdb.min.js"></script>
+ <!-- Your custom scripts (optional) -->
+ <script type="text/javascript"></script>
+</html>
