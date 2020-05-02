@@ -85,7 +85,7 @@
     var masa=["mg", "cg", "dg", "g", "dkg","hg", "kg"];
     var volumen=["mm³","cm³", "dm³", "m³","km³"];
     var povrsina=["mm²","cm²", "dm²", "m²", "ha","km²"];
-    var brzina=["m/s", "m/h", "km/s", "km/h"];
+    var brzina=["m/s", "km/s", "m/h", "km/h"];
     var pritisak=["paskal", "kilopaskal", "milibar", "bar"];
     function convertMass(broj, valuta)
     {
@@ -166,7 +166,7 @@
         if(vrijednost==masa) tez_faktor=1;
         if(vrijednost==povrsina) tez_faktor=2;
         if(vrijednost==volumen) tez_faktor=3;
-        if(vrijednost==brzina) convertSpeed();
+        if(vrijednost==brzina) {convertSpeed(b1_value, b2_value, num_value);return;}
         var rezultat;
         var br_m=0,br_v=0;
       for(var i=0;i<vrijednost.length;i++)
@@ -180,9 +180,27 @@
       console.log(rezultat);
       document.getElementById("rezultat").textContent=rezultat;
     }
-    function convertSpeed()
+    function convertSpeed(b1_value, b2_value, num_value)
     {
-
+      var br_m=0,br_v=0;
+      for(var i=0;i<vrijednost.length;i++)
+      {
+        if(vrijednost[i]==b1_value) br_m=i;
+        else if(vrijednost[i]==b2_value) br_v=i;
+      }
+      if(br_m == 0 && br_v==0) rezultat=num_value;
+      else if(br_m<br_v && br_v-br_m<2) rezultat=(num_value/1000);
+      else if(br_m<br_v && br_v-br_m>2) rezultat=((num_value/1000)*3600);
+      else if(br_m<br_v && (br_v-br_m)%2==0)rezultat=((num_value)*3600);
+      else if(br_m>br_v && br_m-br_v<2) rezultat=(num_value*1000);
+      else if(br_m>br_v && br_m-br_v>2) rezultat=((num_value*1000)/3600);
+      else if(br_m>br_v && (br_m-br_v)%2==0) rezultat=(num_value/3600);
+      // else rezultat= (num_value/Math.pow(Math.pow(10, 2)))/3600;
+      console.log(br_m);
+      console.log(br_v);
+      console.log(rezultat);
+      document.getElementById("rezultat").textContent=rezultat;
+    
     }
     
 </script>
