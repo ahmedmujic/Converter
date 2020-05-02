@@ -20,14 +20,8 @@
   <link rel="stylesheet" href="styless.css">
 </head>
 <body>
-    Dužina
-    B. Masa
-    C. Volumen
-    D.Površina
-    E. Brzina
-    F. Pritisak
   <header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark blue scrolling-navbar ">
+    <nav class="navbar navbar-expand-lg navbar-dark blue scrolling-navbar ">
       <strong class="navbar-brand ml-5">Konverter jedinica</strong>
       <div class="navbar-collapse" >
         <ul class="navbar-nav  " id="choose">
@@ -52,31 +46,11 @@
   
   </header>
  <!-- Default form contact -->
+ <div class="cont_forma">
 <form class="text-center border border-light p-5 mt-3" id="forma">
-
-    <p class="h4 mb-4">Brz i jednostavan konverter jedinica</p>
-
-    <!-- Name -->
-    <input type="number" id="unos" class="form-control mb-4" placeholder="Vrijednost" required>
-
-
-    <!-- Subject -->
-    <!-- <label>Odaberite jedinicu iz koje pretvarate</label>
-    <select class="browser-default custom-select mb-4" id="base1">
-        
-    </select> -->
-     <!-- Subject -->
-     
-
-   
-
-    <!-- Send button -->
-    <button class="btn btn-info btn-block" onclick="pretvori(unos.value, base1.value, base2.value)" id="dugme">IZRAČUNAJ</button>
-
-</form>
-<!-- Default form contact -->
- 
-
+    <p class="h4 mb-4" id="naslov">Brz i jednostavan konverter jedinica</p>
+ </form>
+</div>
 </body>
 <script>
     var b=0;
@@ -86,7 +60,7 @@
     var volumen=["mm³","cm³", "dm³", "m³","km³"];
     var povrsina=["mm²","cm²", "dm²", "m²", "ha","km²"];
     var brzina=["m/s", "km/s", "m/h", "km/h"];
-    var pritisak=["paskal", "kilopaskal", "milibar", "bar"];
+    var pritisak=["milipaskal","centipaskal", "decipaskal","paskal","dekapaskal", "hectopaskal", "kilopaskal","newton","bar", "megapaskal"];
     function convertMass(broj, valuta)
     {
         if (b>0)
@@ -108,7 +82,31 @@
 
             var element31 = document.getElementById('opis3');
             element31.parentNode.removeChild(element31);
+
+            var element32 = document.getElementById('unos');
+            element32.parentNode.removeChild(element32);
+
+            var element33 = document.getElementById('dugme');
+            element33.parentNode.removeChild(element33);
         }
+        // <!-- <button class="btn btn-info btn-block" onclick="" id="dugme">IZRAČUNAJ</button>
+          var dugme= document.createElement("button");
+          dugme.setAttribute("id","dugme");
+          dugme.setAttribute("class","btn btn-info btn-block");
+          dugme.setAttribute("onclick","pretvori(unos.value, base1.value, base2.value)");
+          var naslov = document.getElementById('naslov');
+          // unos.setAttribute("required");
+          var TXT = document.createTextNode("IZRAČUNAJ");
+          dugme.appendChild(TXT);
+          umetni(dugme,naslov);
+        // <!-- <input type="number" id="unos" class="form-control mb-4" placeholder="Vrijednost" required>
+          var unos= document.createElement("input");
+          unos.setAttribute("id","unos");
+          unos.setAttribute("class","form-control mb-4");
+          unos.setAttribute("type","number");
+          unos.setAttribute("placeholder","Vrijednost");
+          // unos.setAttribute("required");
+          document.getElementById("forma").insertBefore(unos,document.getElementById("dugme"));
         vrijednost=valuta;
         var node1= document.createElement("select");
         node1.setAttribute("id","base1");
@@ -155,6 +153,9 @@
          b++;
         
     }
+    function umetni(novi, postojeci) {
+    postojeci.parentNode.insertBefore(novi, postojeci.nextSibling);
+}
     function pretvori(num_value, b1_value, b2_value)
     {
         // for(val in vrijednosti1)
@@ -163,9 +164,9 @@
         // }
 
           var tez_faktor;
-        if(vrijednost==masa) tez_faktor=1;
-        if(vrijednost==povrsina) tez_faktor=2;
-        if(vrijednost==volumen) tez_faktor=3;
+        if(vrijednost==masa  || vrijednost==pritisak) tez_faktor=1;
+        if(vrijednost==povrsina ) tez_faktor=2;
+        if(vrijednost==volumen ) tez_faktor=3;
         if(vrijednost==brzina) {convertSpeed(b1_value, b2_value, num_value);return;}
         var rezultat;
         var br_m=0,br_v=0;

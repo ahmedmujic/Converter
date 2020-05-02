@@ -9,3 +9,26 @@
 {
     text-align: start;
 }
+#forma
+{
+    width: 60%;
+}
+.cont_forma
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+nav
+{
+    display: flex;
+}
+.navbar
+{
+    justify-content: center;
+}
+.navbar-nav
+{
+    flex-direction: row;
+}
